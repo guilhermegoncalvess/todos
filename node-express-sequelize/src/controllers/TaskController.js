@@ -59,6 +59,6 @@ module.exports = {
 
         await task.destroy();
 
-        return response.json({message: 'Todo removido'});
+        return response.json({message: 'Todo removed'});
     }
 };
