@@ -183,12 +183,21 @@ export default createGlobalStyle`
     }
 
     .todo-list li input {
-        /* background-color: red; */
-        display: block;
-        width: 80%;
-        padding: 15px 15px 15px 50px;
-        margin: 0 0 0 43px;
-        cursor: initial;
+        position: relative;
+        margin: 0;
+        width: 100%;
+        font-size: 24px;
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: 1.4em;
+        border: 0;
+        color: inherit;
+        padding: 6px;
+        border: 1px solid #999;
+        /* box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2); */
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     .todo-list li.editing .view {
@@ -297,9 +306,10 @@ export default createGlobalStyle`
         height: 20px;
         text-align: center;
         border-top: 1px solid #e6e6e6;
+        background-color: rgba(255,255,255);
     }
 
-    .footer:before {
+    .footer:before { 
         content: '';
         position: absolute;
         right: 0;
@@ -346,11 +356,11 @@ export default createGlobalStyle`
     }
 
     .filters li a:hover {
-        border-color: rgba(175, 47, 47, 0.1);
+        border-color: red;
     }
 
     .filters li a.selected {
-        border-color: rgba(175, 47, 47, 0.2);
+        border-color: red;
     }
 
     .clear-completed,
