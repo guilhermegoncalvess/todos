@@ -14,16 +14,14 @@ interface Todo {
 
 const Dashboard: React.FC = () => {
 
-
+    const [nowShowing, setNowShowing] = useState('all')
     const [newTodo, setNewTodo] = useState('');
     const [editText, setEditText] = useState('');
     const [editing, setEditing] = useState<Todo | null>(null);
     const [ toggle, setToggle ] = useState(false);
     const [ todos, setTodos] = useState<Todo[]>([]) ;
 
-    var val = false;
-
-    const activeTodoCount = 0;
+    const todosActived = todos.filter( todo => todo.completed === false);
 
     useEffect(() => {
       api.get<Todo[]>('/tasks').then(response => {
@@ -70,37 +68,38 @@ const Dashboard: React.FC = () => {
         });
     }
 
+    function handleKeyDown(todo: Todo, event: any) {
+      if(event.key === 'Enter' ){
+        handleSubmit(todo, event)
+      }
+    }
     async function handleSubmit(todo: Todo, event?: any) {
       const { id } = todo;
       
       const todoIndex = todos.findIndex( todo => {
         return todo.id === id;
-      });
-      
-      
-      if( event.key !== 'Enter') {
-        
-        event.preventDefault();
-        
-        if( todos[todoIndex].title !== editText){
-          todos[todoIndex].title = editText;
-          
-          setTodos([...todos]);
-          api.put(`/tasks/${id}`, {title: editText }).then( response => {
+      });  
+
+      if( todos[todoIndex].title === editText ){
+        setEditing(null)
+        return
+      } else {
+        todos[todoIndex].title = editText;
+
+        setTodos([...todos]);
+        setEditing(null) 
+        api.put(`/tasks/${id}`, {title: editText }).then( response => {
             const todo = response.data;
-            
+          
             console.log(todo);
             console.log('BLUR')
-          });
-        }
+        });
+          
       }
-        
-  
       
     }
 
     async function handleRemoveTodo(id: string){
-
       const todoIndex = todos.findIndex( todo => {
         return todo.id === id
       });
@@ -115,7 +114,6 @@ const Dashboard: React.FC = () => {
     }
 
     function toggleAll(){
-      
       todos.forEach( todo => {
           todo.completed = !toggle;
       });
@@ -132,7 +130,6 @@ const Dashboard: React.FC = () => {
 
 
     return ( 
-    
         <>
         <header className="todoapp">
           <h1>todos</h1>
@@ -152,7 +149,7 @@ const Dashboard: React.FC = () => {
 							className="toggle-all"
 							type="checkbox"
               onChange={e => toggleAll()}
-							checked={activeTodoCount === 0}
+							checked={todosActived.length === 0}
 						/>
 						<label
 							htmlFor="toggle-all"
@@ -162,53 +159,73 @@ const Dashboard: React.FC = () => {
               
                 <li key={todo.id} >
                   <div >
-                    
                     <input 
                           className="toggle" 
                           type="checkbox" checked={todo.completed} 
-                          onChange={ e => handleCheckChangeTodo(todo)}>
-                            
-                    </input>
-                  { 
-                    !(editing === todo) &&
-                                        <label onDoubleClick={e => onEdit(todo, e)}>
-                                              {todo.title}
-                                          <span className="date">
-                                            Create at {formatDate(todo.createdAt)}
-                                          </span> 
-                                        </label>  
-                  }
+                          onChange={ e => handleCheckChangeTodo(todo)}
+                    />
 
-                  { !(editing === todo) &&  <button className="destroy" onClick={e => handleRemoveTodo(todo.id)} /> }
+                    { !(editing === todo) &&
+                                          <label onDoubleClick={ e => onEdit(todo, e)}> {todo.title}
+                                            <span className="date"> Create at {formatDate(todo.createdAt)} </span> 
+                                          </label>  
+                    }
 
-                   {/* <input 
-                        className="edit"
-                        type="text"
-                        value={todo.title}
-                        onBlur={e => handleSubmit(todo, e)}
-                        // onChange= {e => setEditText(e.target.value)}
-                        onKeyDown={e => handleSubmit(todo, e)}
-                    /> */}
-                    
-                    {editing === todo &&  
-                      <input 
-                          className="editing"
-                          type="text"
-                          onDoubleClick={ e => setEditText(todo.title)}
-                          defaultValue ={editText}
-                          // onFocus= { e => setEditText(editText)}
-                          onBlur={ e => handleSubmit(todo, e)}
-                          onChange= {e => setEditText(e.target.value)}
-                          onKeyDown={e => handleSubmit(todo, e)}
-                      >
-                      </input> 
-                  } 
+                    { !(editing === todo) && <button className="destroy" onClick={e => handleRemoveTodo(todo.id)} /> }
+
+                    { editing === todo &&  
+                                        <input 
+                                        className="editing"
+                                        type="text"
+                                        value ={editText}
+                                        onBlur={ e => handleSubmit(todo,e)}
+                                        onChange= {e => setEditText(e.target.value)}
+                                        autoFocus={true}
+                                        onKeyDown={e => handleKeyDown(todo, e)}
+                                        />
+                    } 
                   </div>
-
                 </li>
               )}
 						</ul>
-					</section>        
+					</section>  
+          { ( todos.length > 0) && 
+          <footer className="footer">
+					<span className="todo-count">
+						<strong>{todosActived.length} </strong> 
+            {todosActived.length > 1 ? "items " : "item "}
+            left
+					</span>
+					<ul className="filters">
+						<li>
+							<a
+								href="#/"
+                onClick={e => setNowShowing('all')}
+							  className={nowShowing === "all" ? "selected" : ''} >
+                  All
+							</a>
+						</li>
+						{' '}
+						<li>
+							<a
+								href="#/active"
+                onClick={e => setNowShowing('active')}
+								className={nowShowing === "active" ? "selected" : ''} >
+									Active
+							</a>
+						</li>
+						{' '}
+						<li>
+							<a
+								href="#/completed"
+                onClick={e => setNowShowing('completed')}
+								className={nowShowing === "completed" ? "selected" : ''}>
+									Completed
+							</a>
+						</li>
+					</ul>
+				</footer>      
+      }
       </>
     )
 }
