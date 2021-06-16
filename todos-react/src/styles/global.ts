@@ -34,6 +34,7 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-weight: 300;
+        overflow-y: scroll;
     }
 
     :focus {
@@ -309,7 +310,7 @@ export default createGlobalStyle`
         background-color: rgba(255,255,255);
     }
 
-    .footer:before { 
+    /* .footer:before { 
         content: '';
         position: absolute;
         right: 0;
@@ -322,7 +323,7 @@ export default createGlobalStyle`
                     0 9px 1px -3px rgba(0, 0, 0, 0.2),
                     0 16px 0 -6px #f6f6f6,
                     0 17px 2px -6px rgba(0, 0, 0, 0.2);
-    }
+    } */
 
     .todo-count {
         float: left;
