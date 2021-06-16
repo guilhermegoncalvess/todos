@@ -7,7 +7,9 @@ const routes = express.Router();
 
 routes.get('/tasks', TaskController.listAll);
 
-// routes.get('/tasks/:completed', TaskController.listAllByStatus);
+routes.get('/tasks/completed', TaskController.listAllCompleted);
+
+routes.get('/tasks/active', TaskController.listAllActive);
 
 routes.post('/tasks', TaskController.store);
 

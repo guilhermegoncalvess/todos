@@ -10,12 +10,16 @@ module.exports = {
         return response.json(tasks);
     },
 
-    async listAllByStatus( request, response ) {
-        const  { completed } = Boolean(request.params)
+    async listAllCompleted( request, response ) { 
+        const tasks = await Task.findAll({ where: { completed: true } });
 
-        console.log(completed)
-        
-        const tasks = await Task.findAll({ where: { completed } });
+        console.log(tasks)
+
+        return response.json(tasks);
+    },
+
+    async listAllActive( request, response ) { 
+        const tasks = await Task.findAll({ where: { completed: false } });
 
         console.log(tasks)
 
