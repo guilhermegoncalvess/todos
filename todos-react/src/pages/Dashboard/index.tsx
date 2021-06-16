@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 
 import api from '../../services/api';
 import formatDate from '../../utils/formaDate';
@@ -22,13 +21,13 @@ const Dashboard: React.FC = () => {
     const [ todos, setTodos] = useState<Todo[]>([]) ;
 
     const todosActived = todos.filter( todo => todo.completed === false);
+    const todosCompleted = todos.filter( todo => todo.completed === true);
 
     useEffect(() => {
       api.get<Todo[]>('/tasks').then(response => {
         
         setTodos(response.data)
       }); 
-      console.log(todos)
     }, [])
 
     
@@ -43,11 +42,9 @@ const Dashboard: React.FC = () => {
           const todo = response.data;
 
           setTodos([...todos, todo]);
-          console.log(todos);
         });
 
         setNewTodo("")
-        console.log(newTodo);
     }
 
     async function handleCheckChangeTodo(todo: Todo){
@@ -62,9 +59,7 @@ const Dashboard: React.FC = () => {
       setTodos([...todos]);
       
       api.put(`/tasks/${id}`, {id, completed: !completed }).then( response => {
-          const todo = response.data;
           
-          console.log(todo);
         });
     }
 
@@ -89,10 +84,7 @@ const Dashboard: React.FC = () => {
         setTodos([...todos]);
         setEditing(null) 
         api.put(`/tasks/${id}`, {title: editText }).then( response => {
-            const todo = response.data;
           
-            console.log(todo);
-            console.log('BLUR')
         });
           
       }
@@ -106,16 +98,37 @@ const Dashboard: React.FC = () => {
       todos.splice(todoIndex, 1);
 
       api.delete(`/tasks/${id}`).then( response => {
-        const todo = response.data;
         
         setTodos([...todos])
-        console.log(todo);
       });
     }
 
-    function toggleAll(){
+    async function handleClearCompleted(){
+      todos.forEach( (todo, index) => {
+
+        if( todo.completed ){
+          api.delete(`/tasks/${todo.id}`).then(
+            );
+            // setTimeout(() => {
+              
+            // }, 100);
+          }
+          
+          todos.splice(index, 1);
+
+          setTodos([...todos])
+      }); 
+
+      
+    }
+
+    async function toggleAll(){
       todos.forEach( todo => {
           todo.completed = !toggle;
+
+          api.put(`/tasks/${todo.id}`, {completed: todo.completed }).then( response => {
+          
+          });
       });
 
       setToggle(!toggle)
@@ -189,7 +202,7 @@ const Dashboard: React.FC = () => {
               )}
 						</ul>
 					</section>  
-          { ( todos.length > 0) && 
+          { ( todos) && 
           <footer className="footer">
 					<span className="todo-count">
 						<strong>{todosActived.length} </strong> 
@@ -199,7 +212,7 @@ const Dashboard: React.FC = () => {
 					<ul className="filters">
 						<li>
 							<a
-								href="#/"
+								href="/"
                 onClick={e => setNowShowing('all')}
 							  className={nowShowing === "all" ? "selected" : ''} >
                   All
@@ -208,7 +221,7 @@ const Dashboard: React.FC = () => {
 						{' '}
 						<li>
 							<a
-								href="#/active"
+								href="/active"
                 onClick={e => setNowShowing('active')}
 								className={nowShowing === "active" ? "selected" : ''} >
 									Active
@@ -217,13 +230,14 @@ const Dashboard: React.FC = () => {
 						{' '}
 						<li>
 							<a
-								href="#/completed"
+								href="/completed"
                 onClick={e => setNowShowing('completed')}
 								className={nowShowing === "completed" ? "selected" : ''}>
 									Completed
 							</a>
 						</li>
 					</ul>
+            {(todosCompleted.length > 0) && <button className="clear-completed" onClick= { e => handleClearCompleted()} >Clear completed</button>}
 				</footer>      
       }
       </>
