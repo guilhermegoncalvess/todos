@@ -1,21 +1,21 @@
 const { response } = require('express');
 const express = require('express');
 
-const TaskController = require('./controllers/TaskController')
+const TodoController = require('./controllers/TodoController')
 
 const routes = express.Router();
 
-routes.get('/tasks', TaskController.listAll);
+routes.get('/todos', TodoController.listAll);
 
-routes.get('/tasks/completed', TaskController.listAllCompleted);
+routes.get('/todos/completed', TodoController.listAllCompleted);
 
-routes.get('/tasks/active', TaskController.listAllActive);
+routes.get('/todos/active', TodoController.listAllActive);
 
-routes.post('/tasks', TaskController.store);
+routes.post('/todos', TodoController.store);
 
-routes.put('/tasks/:id', TaskController.update);
+routes.put('/todos/:id', TodoController.update);
 
-routes.delete('/tasks/:id', TaskController.delete);
+routes.delete('/todos/:id', TodoController.delete);
 
 
 module.exports = routes;

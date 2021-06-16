@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
 
-const Task = require('../models/Task')
+const Todo = require('../models/Todo')
 
 const connection = new Sequelize(dbConfig);
 
-Task.init(connection);
+Todo.init(connection);
 
 module.exports = connection;
