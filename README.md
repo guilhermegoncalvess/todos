@@ -26,7 +26,7 @@ A API possui as funcionalidades de inserir, listar, atualizar e deletar os *todo
 docker-compose up
 ~~~
 
-Caso queira executar de forma independente execute na raiz do diretório:
+Caso queira executar de forma independente, execute na raiz do diretório:
 
 #### front-end
 
