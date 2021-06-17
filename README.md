@@ -36,7 +36,7 @@ yarn install
 yarn start
 ~~~
 
-# :pencil2: Autor
+## :pencil2: Autor
 <table>
   <tr>
     <td align="center">
