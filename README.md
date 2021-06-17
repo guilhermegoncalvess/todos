@@ -1,6 +1,6 @@
 # :rocket: TODOS    
-[![MySQL](https://img.shields.io/static/v1?label=React&message=9&colorA=darkblue&color=black&logo=reactl&logoColor=white)](https://mysql.com/) 
-[![Symfony Doctrine ORM](https://img.shields.io/static/v1?label=Symfony%20Doctrine&message=6.0&colorA=blue&color=black&logo=symfony)](https://www.doctrine-project.org/) 
+[![React](https://img.shields.io/static/v1?label=React&message=9&colorA=darkblue&color=black&logo=REACT&logoColor=white)](https://pt-br.reactjs.org/) 
+[![Node.js](https://img.shields.io/static/v1?label=Node.js&message=6.0&colorA=blue&color=black&logo=node)](https://nodejs.org/en/about/) 
 [![PHPUnit](https://img.shields.io/static/v1?label=PHPUnit&message=7.0&colorA=blue&color=black&logo=PHP&logoColor=white)](https://phpunit.de/) 
 [![GuzzleHTTP](https://img.shields.io/static/v1?label=Guzzle%20HTTP&message=1.3.1&colorA=blue&color=black&logo=PHP&logoColor=white)](http://docs.guzzlephp.org/en/stable/)
 
