@@ -1,8 +1,8 @@
 # :rocket: TODOS    
-[![React](https://img.shields.io/static/v1?label=React&&colorA=darkblue&color=black&logo=REACT&logoColor=white)](https://pt-br.reactjs.org/) 
-[![Node.js](https://img.shields.io/static/v1?label=Node.js&colorA=blue&color=black&logo=NODE&logoColor=white)](https://nodejs.org/en/about/) 
-[![Sequelize](https://img.shields.io/static/v1?label=Sequilize&colorA=blue&color=black&logo=SEQUELIZE&logoColor=white)](https://phpunit.de/) 
-[![Express](https://img.shields.io/static/v1?label=Express&colorA=blue&color=black&logo=EXPRESS&logoColor=white)](https://expressjs.com/pt-br/)
+[![React](https://img.shields.io/static/v1?label=React&message=>17&colorA=darkblue&color=black&logo=REACT&logoColor=white)](https://pt-br.reactjs.org/) 
+[![Node.js](https://img.shields.io/static/v1?label=Node.js&message=>12&colorA=blue&color=black&logo=NODE&logoColor=white)](https://nodejs.org/en/about/) 
+[![Sequelize](https://img.shields.io/static/v1?label=Sequilize&message=>6.6.2&colorA=blue&color=black&logo=SEQUELIZE&logoColor=white)](https://sequelize.org/) 
+[![Express](https://img.shields.io/static/v1?label=Express&message=>4.7&colorA=blue&color=black&logo=EXPRESS&logoColor=white)](https://expressjs.com/pt-br/)
 
 
 ## :book: Descrição 
