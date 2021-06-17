@@ -22,7 +22,7 @@ const ActiveTodo: React.FC = () => {
     const [todosCompleted, setTodosCompleted] = useState<Todo[]>([]);
     
     useEffect(() => {
-      api.get<Todo[]>('/tasks').then(response => {
+      api.get<Todo[]>('/todos').then(response => {
         const todosActived = response.data.filter( todo => todo.completed === false);
         const todosCompleted = response.data.filter( todo => todo.completed === true);
         
@@ -39,7 +39,7 @@ const ActiveTodo: React.FC = () => {
         }
         event.preventDefault();
 
-        api.post('/tasks', {title: event.target.value, completed: false }).then( response => {
+        api.post('/todos', {title: event.target.value, completed: false }).then( response => {
           const todo = response.data;
 
           setTodos([...todos, todo]);
@@ -60,7 +60,7 @@ const ActiveTodo: React.FC = () => {
       todos.splice(todoIndex, 1);
       setTodos([...todos]);
       
-      api.put(`/tasks/${id}`, {id, completed: !completed }).then( response => {
+      api.put(`/todos/${id}`, {id, completed: !completed }).then( response => {
           const todo = response.data;
           
           console.log(todo);
@@ -87,7 +87,7 @@ const ActiveTodo: React.FC = () => {
 
         setTodos([...todos]);
         setEditing(null) 
-        api.put(`/tasks/${id}`, {title: editText }).then( response => {
+        api.put(`/todos/${id}`, {title: editText }).then( response => {
             const todo = response.data;
           
             console.log(todo);
@@ -104,7 +104,7 @@ const ActiveTodo: React.FC = () => {
       });
       todos.splice(todoIndex, 1);
 
-      api.delete(`/tasks/${id}`).then( response => {
+      api.delete(`/todos/${id}`).then( response => {
         const todo = response.data;
         
         setTodos([...todos])

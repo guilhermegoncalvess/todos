@@ -2,8 +2,8 @@ version: "3"
 
 services:
   api:
-    build: ./node-express-sequelize/
-    command:  [ "./wait-for-it.sh", 'db', "yarn", "dev"] 
+    build: ./back-end/
+    command:  [ "./wait-for-it.sh", 'db', "yarn", "start"] 
     networks:
       - default
       - app-connect
@@ -17,7 +17,7 @@ services:
         POSTGRES_PASSWORD: 'docker'
   
   web-app:
-    build: ./todos-react/
+    build: ./front-end/
     command: ["yarn", "start"]
     networks:
       - default
