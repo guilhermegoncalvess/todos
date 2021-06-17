@@ -26,11 +26,25 @@ A API possui as funcionalidades de inserir, listar, atualizar e deletar os *todo
 docker-compose up
 ~~~
 
-Caso queira executar de forma independente o back-end e front-end, execute na raiz de cada diretório:
+Caso queira executar de forma independente execute na raiz do diretório:
 
-### Yarn
+#### front-end
+
 ~~~bash
 yarn install
+~~~
+~~~bash
+yarn start
+~~~
+### back-end
+~~~bash
+yarn install
+~~~
+~~~bash
+yarn sequelize db:create
+~~~
+~~~bash
+yarn sequelize db:migrate
 ~~~
 ~~~bash
 yarn start
